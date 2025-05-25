@@ -23,7 +23,7 @@ const VantaHaloBackground = ({xOffset, yOffset, size=1.5, height='100vh'}: {xOff
             }
 
             if (!window.VANTA?.HALO) {
-                const vanta = await import('vanta/dist/vanta.halo.min' as any)
+                const vanta = await import('vanta/dist/vanta.halo.min')
                 window.VANTA = { ...window.VANTA, HALO: vanta.default }
             }
 

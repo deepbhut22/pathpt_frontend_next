@@ -27,7 +27,7 @@ export const HoverEffect = ({
     setProvinceLinks: (provinceLinks: ProvinceLinksOption[]) => void;
     setShowLinksDialog: (showLinksDialog: boolean) => void;
 }) => {
-    let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     return (
         <div

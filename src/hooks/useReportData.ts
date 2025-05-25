@@ -38,7 +38,7 @@ export const useReportData = (regenerateReport: boolean, setRegenerateReport: (v
           
         } catch (error: any) {
           setIsLoading(false);
-          setError(error.response.data.error);
+          setError(error?.response?.data?.error);
         }
       }
     };

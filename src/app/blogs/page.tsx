@@ -5,40 +5,41 @@ import VantaHaloBackground from '@/components/ui/backgrounds/HaloBg';
 import { BlogPostNew } from '@/types';
 import BlogListingClient from '@/app/blogs/BlogListClientComponent';
 import api from '@/utils/axios';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
+  title: 'Canadian Immigration Blog | Expert Tips, News & Policy Updates',
+  description: 'Stay informed on Canadian immigration with expert-written blog posts covering express entry, visas, PR pathways, legal advice, and policy changes.',
+  openGraph: {
     title: 'Canadian Immigration Blog | Expert Tips, News & Policy Updates',
-    description: 'Stay informed on Canadian immigration with expert-written blog posts covering express entry, visas, PR pathways, legal advice, and policy changes.',
-    openGraph: {
-        title: 'Canadian Immigration Blog | Expert Tips, News & Policy Updates',
-        description: 'Explore expert articles on Canadian immigration, including Express Entry, work and study permits, PR guidance, and the latest IRCC policy updates.',
-        url: 'https://pathpr.ca/blogs',
-        siteName: 'Pathpr Immigration Blog',
-        type: 'website',
-        images: [
-            {
-                url: 'https://pathpr.ca/og/immigration-blog-cover.png', // customize this URL to your Open Graph image
-                width: 1200,
-                height: 630,
-                alt: 'Canadian Immigration Blog - Tips and News',
-            },
-        ],
-    },
-    keywords: [
-        'Canadian immigration blog',
-        'Express Entry tips',
-        'IRCC news',
-        'PR application guide',
-        'Canada work visa',
-        'study in Canada',
-        'Pathpr immigration updates',
-        'immigration expert articles',
-        'Canada permanent residency',
-        'Canadian visa requirements',
+    description: 'Explore expert articles on Canadian immigration, including Express Entry, work and study permits, PR guidance, and the latest IRCC policy updates.',
+    url: 'https://pathpr.ca/blogs',
+    siteName: 'Pathpr Immigration Blog',
+    type: 'website',
+    images: [
+      {
+        url: 'https://pathpr.ca/og/immigration-blog-cover.png', // customize this URL to your Open Graph image
+        width: 1200,
+        height: 630,
+        alt: 'Canadian Immigration Blog - Tips and News',
+      },
     ],
-    alternates: {
-        canonical: 'https://pathpr.ca/blogs',
-    },
+  },
+  keywords: [
+    'Canadian immigration blog',
+    'Express Entry tips',
+    'IRCC news',
+    'PR application guide',
+    'Canada work visa',
+    'study in Canada',
+    'Pathpr immigration updates',
+    'immigration expert articles',
+    'Canada permanent residency',
+    'Canadian visa requirements',
+  ],
+  alternates: {
+    canonical: 'https://pathpr.ca/blogs',
+  },
 };
 
 
@@ -107,11 +108,13 @@ export default async function BlogListingPage() {
                 </div>
 
                 {/* Client Component for interactive functionality */}
-                <BlogListingClient
-                    initialBlogs={blogs}
-                    categories={categories}
-                    tags={tags}
-                />
+                <Suspense fallback={<div>Loading blogs...</div>}>
+                    <BlogListingClient
+                        initialBlogs={blogs}
+                        categories={categories}
+                        tags={tags}
+                    />
+                </Suspense>
             </div>
         </Layout>
     );

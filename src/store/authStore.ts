@@ -167,17 +167,18 @@ const useAuthStore = create<AuthState & {
       const response = await api.post('/auth/login', { email, password });
 
       if (response.status === 200) {
-        set({ user: response.data, isAuthenticated: true, isLoading: true });
+        useAuthStore.getState().initializeAuth();
+        // set({ user: response.data, isAuthenticated: true, isLoading: true });
 
-        const profileResponse = await api.get('/auth/profile');
-        useUserStore.getState().resetUserProfile();
+        // const profileResponse = await api.get('/auth/profile');
+        // useUserStore.getState().resetUserProfile();
 
-        const userProfile = profileResponse.data.userProfile;
-        const profileComplete = isProfileComplete(userProfile);
-        userProfile.isComplete = profileComplete;
-        set({ user: profileResponse.data.user, isAuthenticated: true, isLoading: false });
-        useUserStore.setState({ userProfile });
-        return true;  
+        // const userProfile = profileResponse.data.userProfile;
+        // const profileComplete = isProfileComplete(userProfile);
+        // userProfile.isComplete = profileComplete;
+        // set({ user: profileResponse.data.user, isAuthenticated: true, isLoading: false });
+        // useUserStore.setState({ userProfile });
+        // return true;  
       }
       // If response status is not 200
       set({ isLoading: false });

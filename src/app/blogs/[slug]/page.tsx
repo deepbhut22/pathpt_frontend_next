@@ -98,20 +98,20 @@ async function getBlogPost(slug: string): Promise<BlogPostNew | null> {
     }
 }
 
-async function getRelatedPosts(category: string, slug: string): Promise<BlogPostNew[]> {
-    try {
-        const response = await api.get(`/blog/related-category/${category}/${slug}`);
+// async function getRelatedPosts(category: string, slug: string): Promise<BlogPostNew[]> {
+//     try {
+//         const response = await api.get(`/blog/related-category/${category}/${slug}`);
 
-        if (response.status !== 200) {
-            return [];
-        }
+//         if (response.status !== 200) {
+//             return [];
+//         }
 
-        return response.data;
-    } catch (error) {
-        console.warn('Failed to fetch related posts:', error);
-        return [];
-    }
-}
+//         return response.data;
+//     } catch (error) {
+//         console.warn('Failed to fetch related posts:', error);
+//         return [];
+//     }
+// }
 
 // Generate metadata for SEO and social sharing
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -128,7 +128,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const title = post.seo?.metaTitle || post.title;
     const description = post.seo?.metaDescription || post.excerpt;
     const image = post.seo?.openGraphImageUrl || post.thumbnailUrl;
-    const url = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/blogs/${post.slug}`;
+    const url = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://pathpr.ca'}/blogs/${post.slug}`;
 
     return {
         title,
@@ -268,7 +268,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         notFound();
     }
 
-    const relatedPosts = await getRelatedPosts(post.categories[0], slug);
+    // const relatedPosts = await getRelatedPosts(post.categories[0], slug);
 
     return (
         <ClientWrapperForLayout>

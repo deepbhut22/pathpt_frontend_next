@@ -42,21 +42,16 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left Column - Main Text */}
-          <div className="space-y-6 md:space-y-8 w-full sm:w-max">
-            <FadeIn delay={30}>
+          <div className="space-y-6 md:space-y-8 sm:w-max">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-blue-50 max-w-full md:max-w-[90%] lg:max-w-[80%]">
                 <TypewriterText text="Find Your Perfect Canadian Immigration Pathway" />
               </h1>
-            </FadeIn>
 
-            <FadeIn delay={2000}>
               <p className="text-base sm:text-md md:text-lg text-blue-200 max-w-xl">
                 <span className="glow-text font-bold text-white">AI-powered guidance</span> to navigate your journey to Canada with personalized
                 recommendations and expert support.
               </p>
-            </FadeIn>
 
-            <FadeIn delay={2300}>
               <div className="space-y-4">
                 {[
                   {
@@ -81,9 +76,7 @@ export default function HeroSection() {
                   </div>
                 ))}
               </div>
-            </FadeIn>
 
-            <FadeIn delay={2750}>
               <div className="flex flex-col gap-3 w-full sm:w-1/2 sm:gap-4 mt-6">
                   <button
                     onClick={handleRedirect}
@@ -122,7 +115,6 @@ export default function HeroSection() {
                     </button>
                   </div>
               </div>
-            </FadeIn>
           </div>
 
           {/* Right Column - Optional image/graphic */}

@@ -161,36 +161,33 @@ export default function Profile() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             <div className="lg:col-span-2">
                                 <Card>
-                                    <CardHeader>
-                                        <CardTitle>Profile Information</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <div className="space-y-6">
-                                            <div>
-                                                {/* <h3 className="text-lg font-medium leading-6 text-secondary-900">
-                          Personal Information
-                        </h3> */}
+                                        <h3 className="text-lg font-medium leading-6 text-secondary-900 px-4">
+                                            Profile Information
+                                        </h3>
+                                        <CardContent>
+                                            <div className="space-y-6">
+                                                <div>
                                                 <div className="mt-5 border-t border-secondary-200">
                                                     <dl className="sm:divide-y sm:divide-secondary-200">
-                                                        <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                                                        <div className="py-4 px-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                                                             <dt className="text-sm font-medium text-secondary-500">Full name</dt>
                                                             <dd className="mt-1 text-sm text-secondary-900 sm:mt-0 sm:col-span-2">
                                                                 {basicInfo.fullName}
                                                             </dd>
                                                         </div>
-                                                        <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                                                        <div className="py-4 px-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                                                             <dt className="text-sm font-medium text-secondary-500">Email address</dt>
                                                             <dd className="mt-1 text-sm text-secondary-900 sm:mt-0 sm:col-span-2">
                                                                 {basicInfo.email}
                                                             </dd>
                                                         </div>
-                                                        <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                                                        <div className="py-4 px-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                                                             <dt className="text-sm font-medium text-secondary-500">Country of citizenship</dt>
                                                             <dd className="mt-1 text-sm text-secondary-900 sm:mt-0 sm:col-span-2">
                                                                 {basicInfo.citizenCountry.charAt(0).toUpperCase() + basicInfo.citizenCountry.slice(1)}
                                                             </dd>
                                                         </div>
-                                                        <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                                                        <div className="py-4 px-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                                                             <dt className="text-sm font-medium text-secondary-500">Current residence</dt>
                                                             <dd className="mt-1 text-sm text-secondary-900 sm:mt-0 sm:col-span-2">
                                                                 {basicInfo.residenceCountry.charAt(0).toUpperCase() + basicInfo.residenceCountry.slice(1)}
@@ -201,10 +198,10 @@ export default function Profile() {
                                             </div>
 
                                             <div>
-                                                <h3 className="text-lg font-medium leading-6 text-secondary-900">
+                                                <h3 className="text-lg font-medium leading-6 text-secondary-900 px-4">
                                                     Profile Completion
                                                 </h3>
-                                                <div className="mt-5 space-y-4">
+                                                <div className="mt-5 space-y-4 p-4">
                                                     {navigationSteps.map((step) => {
                                                         const isStepCompleted = completedSteps[step.id];
 
@@ -268,10 +265,7 @@ export default function Profile() {
 
                             <div className="lg:col-span-1 space-y-6">
                                 <Card>
-                                    <CardHeader>
-                                        <CardTitle>Immigration Status</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
+                                    <CardContent className='p-4'>
                                         {isComplete ? (
                                             <div className="text-center py-6">
                                                 <Award className="h-12 w-12 text-secondary-900 mx-auto mb-4" />
@@ -309,7 +303,7 @@ export default function Profile() {
                                 </Card>
 
                                 <Card>
-                                    <CardContent>
+                                    <CardContent className='p-4'>
                                         <div>
                                             {/* <MessageCircle className="h-6 w-6 text-secondary-900 mb-2" /> */}
                                             <h3 className="text-lg font-semibold text-secondary-900 mb-1">Have questions?</h3>
@@ -330,10 +324,12 @@ export default function Profile() {
 
 
                                 <Card>
-                                    <CardHeader>
-                                        <CardTitle>Quick Links</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
+                                    <div className='px-4'>
+                                        <h3 className="text-md font-medium text-secondary-900">
+                                            Quick Links
+                                        </h3>
+                                    </div>
+                                    <CardContent className='p-4'>
                                         <ul className="space-y-3">
                                             <li>
                                                 <a

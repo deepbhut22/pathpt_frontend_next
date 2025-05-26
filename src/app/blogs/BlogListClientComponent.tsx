@@ -190,9 +190,6 @@ export default function BlogListingClient({
                                         </option>
                                     ))}
                                 </select>
-                                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                    <Tag className="h-4 w-4 text-gray-400" />
-                                </div>
                             </div>
 
                             {/* Tag dropdown */}
@@ -208,9 +205,6 @@ export default function BlogListingClient({
                                         </option>
                                     ))}
                                 </select>
-                                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                    <Tag className="h-4 w-4 text-gray-400" />
-                                </div>
                             </div>
 
                             {/* Sort dropdown */}
@@ -225,9 +219,7 @@ export default function BlogListingClient({
                                     <option value="title">Alphabetical</option>
                                     <option value="readingTime">Reading Time</option>
                                 </select>
-                                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                    <Calendar className="h-4 w-4 text-gray-400" />
-                                </div>
+        
                             </div>
                         </div>
                     </div>

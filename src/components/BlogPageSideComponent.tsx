@@ -13,11 +13,13 @@ import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import api from "@/utils/axios";
+import { MessagePopup } from "./ui/MessagePopup";
 
 export default function BlogPageSideComponent() {
     const router = useRouter();
     const isAuthenticated = useAuthStore(state => state.isAuthenticated);
     const isProfileComplete = useUserStore(state => state.userProfile.isComplete);
+    const isConsultationDialogOpen = useAuthStore(state => state.isConsultationDialogOpen);
 
     const [msg, setMsg] = useState('');
     
@@ -108,7 +110,7 @@ export default function BlogPageSideComponent() {
                         </p>
 
                         <Button
-                            onClick={handleConsultationRequest}
+                            onClick={() => useAuthStore.getState().setIsConsultationDialogOpen(true)}
                             size="sm" className="w-full bg-secondary-900 text-white hover:bg-secondary-950">
                             Book Consultation
                         </Button>
@@ -140,6 +142,19 @@ export default function BlogPageSideComponent() {
                     </div>
                 </CardContent>
             </Card>
+            <MessagePopup
+                isOpen={isConsultationDialogOpen}
+                onClose={() => useAuthStore.getState().setIsConsultationDialogOpen(false)}
+                title="Consultation Request"
+                message={msg === '' ? "This feature is currently under development. Raise your request and we will get back to you soon." : msg}
+                type={msg === '' ? 'info' : msg === 'You have already requested a consultation. Please wait for our response.' ? 'warning' : 'success'}
+                actionText="Raise Request"
+                onAction={() => {
+                    handleConsultationRequest();
+                }}
+                cancelText="Close"
+                maxWidth="2xl"
+            />  
         </ClientOnly>
     )
 }

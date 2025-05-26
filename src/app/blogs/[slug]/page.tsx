@@ -427,6 +427,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     </div>
                 )} */}
             </div>
+            
         </ClientWrapperForLayout>
     );
 }

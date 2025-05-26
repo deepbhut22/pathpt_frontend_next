@@ -156,9 +156,6 @@ export default function AllNewsPage() {
                                                 </option>
                                             ))}
                                         </select>
-                                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                            <Tag className="h-4 w-4 text-gray-400" />
-                                        </div>
                                     </div>
 
                                     {/* Sort dropdown */}
@@ -172,9 +169,6 @@ export default function AllNewsPage() {
                                             <option value="oldest">Oldest First</option>
                                             <option value="title">Alphabetical</option>
                                         </select>
-                                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                            <Calendar className="h-4 w-4 text-gray-400" />
-                                        </div>
                                     </div>
                                 </div>
                             </div>

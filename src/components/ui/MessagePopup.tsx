@@ -87,7 +87,7 @@ export function MessagePopup({
                         </div>
                         <div>
                             <h2 className="text-xl font-semibold text-secondary-900">{title}</h2>
-                            <p className="mt-2 text-secondary-600">{message}</p>
+                            <div className="mt-2 text-secondary-600">{message}</div>
                         </div>
                     </div>
 
@@ -107,7 +107,7 @@ export function MessagePopup({
                                         <div className="mr-3 text-secondary-900">
                                             {benefit.icon || <CheckCircle className="h-5 w-5" />}
                                         </div>
-                                        <p className="text-secondary-600">{benefit.text}</p>
+                                        <div className="text-secondary-600">{benefit.text}</div>
                                     </motion.div>
                                 ))}
                             </div>

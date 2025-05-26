@@ -10,7 +10,6 @@ import { useState } from "react";
 import ChatBox from "@/components/ui/ChatBox";
 import { MessagePopup } from "@/components/ui/MessagePopup";
 import { useRouter } from "next/navigation";
-import { Helmet } from "react-helmet-async";
 export default function MapleAI() {
 
     const [isLoginPopup, setIsLoginPopup] = useState(false);
@@ -29,7 +28,7 @@ export default function MapleAI() {
                 useAuthStore.getState().setIsPopupOpen(true);
             }
         } else {
-            useAuthStore.getState().setIsPopupOpen(true);
+            useAuthStore.getState().setIsLoginRequiredPopupOpen(true);
         }
     }
 

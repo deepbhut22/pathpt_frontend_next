@@ -101,7 +101,7 @@ export default function Header() {
     if (insightsItems.some(item => item.path === path)) {
       setIsDropdownOpen(false);
       router.push(path);
-    } else if (!isAuth && path !== '/' && path !== '/blog-list') {
+    } else if (!isAuth && path !== '/' && path !== '/blogs' && path !== '/mapleAi') {
       useAuthStore.getState().setIsLoginRequiredPopupOpen(true);
     } else if (isAuth && !isProfileComplete && path === '/report') {
       useAuthStore.getState().setIsPopupOpen(true);

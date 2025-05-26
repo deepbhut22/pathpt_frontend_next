@@ -22,6 +22,7 @@ import { Helmet } from 'react-helmet-async';
 import { HorizontalSlider } from '@/components/ui/HorizontalSlider';
 import ClientOnly from '@/components/ClientOnly';
 import AutoShimmer from '@/components/AutoShimmer';
+import ExpressEntryDrawsChart from '@/components/ExpressEntryMainChart';
 // import consultantsData from '@/utils/ConsultanatFakeData.json';
 // import { ConsultantCard } from '@/pages/ConsultantList';
 export default function Home() {
@@ -61,7 +62,7 @@ export default function Home() {
 
 
 
-        {/* <ExpressEntryDrawsChart className='w-full border-none mt-0 pt-24 md:px-24' isFromHomePage={true} /> */}
+        <ExpressEntryDrawsChart className='w-full border-none mt-0 pt-24 md:px-24' isFromHomePage={true} />
 
         {/* Latest News component first as requested */}
         <div className="py-12 bg-white">
@@ -147,8 +148,8 @@ export default function Home() {
                       </div>
                     </div>
                     <div className='flex justify-between items-center'>
-                      <p className='text-secondary-600'>View all draws</p>
-                      <Link className='text-secondary-600 text-sm underline flex items-center gap-1' href="/immigration-statistics"><ExternalLink className='w-4 h-4' /> Private Draws</Link>
+                      {/* <p className='text-secondary-600'>View all draws</p> */}
+                      <Link className='text-secondary-600 text-sm underline flex items-center gap-1' href="/immigration-statistics"><ExternalLink className='w-4 h-4' /> View All Draws</Link>
                     </div>
                   </div>
                 </div>

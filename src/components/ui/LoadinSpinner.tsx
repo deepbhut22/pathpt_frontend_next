@@ -1,3 +1,5 @@
+import loadingGif from '@/assets/loading.gif';
+import Image from 'next/image';
 interface LoadingSpinnerProps {
     size?: 'small' | 'medium' | 'large';
     message?: string;
@@ -24,8 +26,8 @@ export default function LoadingSpinner({
     return (
         <div className={containerClasses}>
             <div className="flex flex-col items-center">
-                <img
-                    src="/assets/loading.gif"
+                <Image
+                    src={loadingGif}
                     alt="Loading..."
                     className={gifSize}
                 />

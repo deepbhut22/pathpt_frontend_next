@@ -1,5 +1,5 @@
 import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import AuthInitializer from '@/components/auth/AuthInitializer';
 import { ReactNode } from 'react';
 
@@ -38,13 +38,16 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1.0,
-  },
   other: {
     'apple-mobile-web-app-title': 'PathPR',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

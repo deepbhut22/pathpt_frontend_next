@@ -24,7 +24,7 @@ const LoginPage = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const isDone = await login(email, password);
+            const isDone = await login(email.toLowerCase(), password);
             // const from = router.pathname || '/';
 
             if (isDone) {

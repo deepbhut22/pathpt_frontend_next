@@ -127,38 +127,38 @@ const useAuthStore = create<AuthState & {
   initializeAuth: async () => {
     // set({ isLoading: true });
 
-    // try {
-    //   const response = await api.get('/auth/profile');
-    //   if (response.status === 200) {
-    //       set({
-    //         user: response.data.user,
-    //         isAuthenticated: true,
-    //       });
+    try {
+      const response = await api.get('/auth/profile');
+      if (response.status === 200) {
+          set({
+            user: response.data.user,
+            isAuthenticated: true,
+          });
 
-    //       useUserStore.getState().resetUserProfile();
+          useUserStore.getState().resetUserProfile();
 
-    //       // Check if profile is complete and set the isComplete flag
-    //       const userProfile = response.data.userProfile;
-    //       const profileComplete = isProfileComplete(userProfile);
-    //       userProfile.isComplete = profileComplete;
-    //       // userProfile.isComplete = true;
+          // Check if profile is complete and set the isComplete flag
+          const userProfile = response.data.userProfile;
+          const profileComplete = isProfileComplete(userProfile);
+          userProfile.isComplete = profileComplete;
+          // userProfile.isComplete = true;
 
-    //       useUserStore.setState({ userProfile });
-    //       set({ isLoading: false });
-    //     } else {
-    //       set({
-    //         user: null,
-    //         isAuthenticated: false,
-    //         isLoading: false
-    //       });
-    //     }
-    //   } catch (error) {
-    //     set({
-    //       user: null,
-    //       isAuthenticated: false,
-    //       isLoading: false
-    //     });
-    //   }
+          useUserStore.setState({ userProfile });
+          set({ isLoading: false });
+        } else {
+          set({
+            user: null,
+            isAuthenticated: false,
+            isLoading: false
+          });
+        }
+      } catch (error) {
+        set({
+          user: null,
+          isAuthenticated: false,
+          isLoading: false
+        });
+      }
   },
 
   login: async (email: string, password: string): Promise<boolean> => {
@@ -178,7 +178,7 @@ const useAuthStore = create<AuthState & {
         // userProfile.isComplete = profileComplete;
         // set({ user: profileResponse.data.user, isAuthenticated: true, isLoading: false });
         // useUserStore.setState({ userProfile });
-        // return true;  
+        return true;  
       }
       // If response status is not 200
       set({ isLoading: false });
@@ -261,7 +261,7 @@ const useAuthStore = create<AuthState & {
   },
 
   logout: async () => {
-    const res = await api.get('/auth/logout');
+    const res = await api.post('/auth/logout');
     if (res.status === 200) {
       set({ user: null, isAuthenticated: false, error: null });
       useUserStore.getState().resetUserProfile();

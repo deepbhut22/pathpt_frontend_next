@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 import { useState } from "react";
 import { PNPLinks } from "../../utils/dummyData";
-import { CardImage } from "./Card";
+import CardImage from "./CardImage";
 
 interface ProvinceLinksOption {
     title: String;

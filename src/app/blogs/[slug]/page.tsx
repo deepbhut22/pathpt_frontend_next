@@ -12,7 +12,8 @@ import {
     Tag as TagIcon,
     Facebook,
     Twitter,
-    Linkedin
+    Linkedin,
+    MessageCircle
 } from 'lucide-react';
 import ShareButtons from './ShareButtons';
 import api from '@/utils/axios';    
@@ -258,6 +259,21 @@ const RelatedPosts = ({ category, slug }: { category: string; slug: string }) =>
 };
 
 import ClientHaloWrapper from '@/components/ui/backgrounds/ClientWrapperForHaloBg';
+import Card from '@/components/ui/Card';
+import CardHeader from '@/components/ui/CardHeader';
+import CardContent from '@/components/ui/CardContent';
+import CardTitle from '@/components/ui/CardTitle';
+import Button from '@/components/ui/Button';
+import useAuthStore from '@/store/authStore';
+import ClientOnly from '@/components/ClientOnly';
+import AutoShimmer from '@/components/AutoShimmer';
+import BlogPageSideComponent from '@/components/BlogPageSideComponent';
+// import Card from '@/components/ui/Card';
+// import CardContent from '@/components/ui/CardContent';
+// import CardHeader from '@/components/ui/CardHeader';
+// import CardTitle from '@/components/ui/CardTitle';
+// import Button from '@/components/ui/Button';
+// import useAuthStore from '@/store/authStore';
 
 // Main page component (Server Component)
 export default async function BlogPostPage({ params }: PageProps) {
@@ -304,7 +320,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
 
                 {/* Content section */}
-                <div className="max-w-4xl mx-auto px-4 mt-4 py-12">
+                <div className="px-4 md:px-12 mt-4 py-12">
                     {/* Back to blog link */}
                     <div className="mb-8">
                         <Link
@@ -315,83 +331,89 @@ export default async function BlogPostPage({ params }: PageProps) {
                             Back to all blogs
                         </Link>
                     </div>
-
-                    {/* Categories and tags */}
-                    <div className="mb-8 flex flex-wrap gap-2">
-                        {post.categories.map(category => (
-                            <span
-                                key={category}
-                                className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm hover:bg-blue-200 transition-colors"
-                            >
-                                {category}
-                            </span>
-                        ))}
-                        {post.tags && post.tags.map(tag => (
-                            <span
-                                key={tag}
-                                className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 text-gray-800 text-sm hover:bg-gray-200 transition-colors"
-                            >
-                                <TagIcon className="h-3 w-3 mr-1" />
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-
-                    {/* Share options - Client Component */}
-                    <ShareButtons title={post.title} />
-
-                    {/* Render images if present */}
-                    {post.imageData && post.imageData.length > 0 && (
-                        <div className="my-8">
-                            {post.imageData.map((image, index) => (
-                                <ImageComponent key={index} imageData={image as ImageData} />
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Render videos if present */}
-                    {post.videoData && post.videoData.length > 0 && (
-                        <div className="my-8">
-                            {post.videoData.map((video, index) => (
-                                <VideoComponent key={index} videoData={video as VideoData} />
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Blog content */}
-                    <div className="prose prose-lg max-w-none">
-                        <MarkdownRenderer content={post.content} />
-
-                        {/* Render tables if present */}
-                        {post.tableData && post.tableData.length > 0 && (
-                            <div className="my-8">
-                                {post.tableData.map((table, index) => (
-                                    <TableComponent key={index} tableData={table} />
+                    <div className='flex flex-col md:flex-row gap-4'>
+                        <div className='w-full md:w-[70%] shadow-lg p-4 rounded-lg'>
+                            {/* Categories and tags */}
+                            <div className="mb-8 flex flex-wrap gap-2">
+                                {post.categories.map(category => (
+                                    <span
+                                        key={category}
+                                        className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm hover:bg-blue-200 transition-colors"
+                                    >
+                                        {category}
+                                    </span>
+                                ))}
+                                {post.tags && post.tags.map(tag => (
+                                    <span
+                                        key={tag}
+                                        className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 text-gray-800 text-sm hover:bg-gray-200 transition-colors"
+                                    >
+                                        <TagIcon className="h-3 w-3 mr-1" />
+                                        {tag}
+                                    </span>
                                 ))}
                             </div>
-                        )}
-                    </div>
 
-                    {/* Author section */}
-                    <div className="mt-12 p-6 bg-gray-50 rounded-lg flex items-start flex-col md:flex-row gap-4">
-                        {post.author.avatarUrl ? (
-                            <img
-                                src={post.author.avatarUrl}
-                                alt={post.author.name}
-                                className="w-16 h-16 rounded-full object-cover"
-                            />
-                        ) : (
-                            <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
-                                <User className="h-8 w-8 text-blue-600" />
+                            {/* Share options - Client Component */}
+                            <ShareButtons title={post.title} />
+
+                            {/* Render images if present */}
+                            {post.imageData && post.imageData.length > 0 && (
+                                <div className="my-8">
+                                    {post.imageData.map((image, index) => (
+                                        <ImageComponent key={index} imageData={image as ImageData} />
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Render videos if present */}
+                            {post.videoData && post.videoData.length > 0 && (
+                                <div className="my-8">
+                                    {post.videoData.map((video, index) => (
+                                        <VideoComponent key={index} videoData={video as VideoData} />
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Blog content */}
+                            <div className="prose prose-lg max-w-none">
+                                <MarkdownRenderer content={post.content} />
+
+                                {/* Render tables if present */}
+                                {post.tableData && post.tableData.length > 0 && (
+                                    <div className="my-8">
+                                        {post.tableData.map((table, index) => (
+                                            <TableComponent key={index} tableData={table} />
+                                        ))}
+                                    </div>
+                                )}
                             </div>
-                        )}
-                        <div>
-                            <h3 className="text-lg font-medium text-gray-900">About the author</h3>
-                            <p className="text-gray-800 font-medium">{post.author.name}</p>
-                            <p className="mt-2 text-gray-600">
-                                Immigration expert with extensive knowledge of Canadian immigration pathways and processes.
-                                Dedicated to helping newcomers navigate their journey to Canada successfully.
-                            </p>
+
+                            {/* Author section */}
+                            <div className="mt-12 p-6 bg-gray-50 rounded-lg flex items-start flex-col md:flex-row gap-4">
+                                {post.author.avatarUrl ? (
+                                    <img
+                                        src={post.author.avatarUrl}
+                                        alt={post.author.name}
+                                        className="w-16 h-16 rounded-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <User className="h-8 w-8 text-blue-600" />
+                                    </div>
+                                )}
+                                <div>
+                                    <h3 className="text-lg font-medium text-gray-900">About the author</h3>
+                                    <p className="text-gray-800 font-medium">{post.author.name}</p>
+                                    <p className="mt-2 text-gray-600">
+                                        Immigration expert with extensive knowledge of Canadian immigration pathways and processes.
+                                        Dedicated to helping newcomers navigate their journey to Canada successfully.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div className='w-full md:w-[30%]'>
+                            <BlogPageSideComponent />
                         </div>
                     </div>
                 </div>

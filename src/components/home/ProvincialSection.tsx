@@ -3,7 +3,11 @@
 import { useState } from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { NewsItem } from '../../types';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardImage } from '../ui/Card';
+import Card from '../ui/Card';
+import CardHeader from '../ui/CardHeader';
+import CardTitle from '../ui/CardTitle';
+import CardContent from '../ui/CardContent';
+import CardFooter from '../ui/CardFooter';
 import {HorizontalSlider} from '../ui/HorizontalSlider';
 import { ProvinceLinksDialog } from '../ProvinceLinksDialogs';
 import { PNPLinks } from '../../utils/dummyData';

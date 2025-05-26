@@ -2,7 +2,11 @@
 
 import { useUserStore } from '@/store/userStore';
 import Layout from '@/components/layout/Layout';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/Card';
+import Card from '@/components/ui/Card';
+import CardHeader from '@/components/ui/CardHeader';
+import CardTitle from '@/components/ui/CardTitle';
+import CardContent from '@/components/ui/CardContent';
+import CardFooter from '@/components/ui/CardFooter';
 import Button from '@/components/ui/Button';
 import { Download, MessageCircle, Edit, ExternalLink, Clipboard, CheckCircle, AlertTriangle, ChevronRight, Loader2, Car } from 'lucide-react';
 import useAuthStore from '@/store/authStore';
@@ -922,7 +926,7 @@ export default function Report() {
                                             </p>
 
                                             <Button
-                                                // onClick={() => useAuthStore.getState().setIsConsultationDialogOpen(true)}
+                                                onClick={() => useAuthStore.getState().setIsConsultationDialogOpen(true)}
                                                 // onClick={() => navigate('/consultants')}
                                                 size="sm" className="w-full bg-secondary-900 text-white hover:bg-secondary-950">
                                                 Book Consultation

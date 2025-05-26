@@ -1,7 +1,12 @@
 import { Calendar, ExternalLink } from 'lucide-react';
 import { NewsItem } from '../../types';
 import { formatDate } from '../../utils/helpers';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardImage } from '../ui/Card';
+import Card from '../ui/Card';
+import CardHeader from '../ui/CardHeader';
+import CardTitle from '../ui/CardTitle';
+import CardContent from '../ui/CardContent';
+import CardFooter from '../ui/CardFooter';
+import CardImage from '../ui/CardImage';
 
 interface NewsCardProps {
   news: NewsItem;

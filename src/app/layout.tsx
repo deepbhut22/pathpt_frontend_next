@@ -4,7 +4,7 @@ import AuthInitializer from '@/components/auth/AuthInitializer';
 import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: 'Pathpr — AI powered immigration guidance',
+  title: 'Pathpr — AI powered immigration guidance ee',
   description: 'Discover personalized immigration pathways to Canada using AI-powered tools. Get started with a free eligibility check today.',
   openGraph: {
     title: 'Pathpr — AI powered immigration guidance',

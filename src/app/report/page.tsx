@@ -8,7 +8,7 @@ import CardTitle from '@/components/ui/CardTitle';
 import CardContent from '@/components/ui/CardContent';
 import CardFooter from '@/components/ui/CardFooter';
 import Button from '@/components/ui/Button';
-import { Download, MessageCircle, Edit, ExternalLink, Clipboard, CheckCircle, AlertTriangle, ChevronRight, Loader2, Car } from 'lucide-react';
+import { MessageCircle, Edit, ExternalLink, Clipboard, CheckCircle, AlertTriangle, Info, Dot } from 'lucide-react';
 import useAuthStore from '@/store/authStore';
 import api from '@/utils/axios';
 import { useExpressEntryStore, useRecommendationStore } from '@/store/reports';
@@ -25,12 +25,149 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ChatBox from '@/components/ui/ChatBox';
 import { MessagePopup } from '@/components/ui/MessagePopup';
-import { Helmet } from 'react-helmet-async';
 import { useRouter } from 'next/navigation';
 // import { ConsultantCard } from './ConsultantList';
 import ConsultantFakeData from '@/utils/ConsultanatFakeData.json';
 import { Consultant } from '@/types';
 import React, { useRef, useState } from 'react';
+import Link from 'next/link';
+
+const infoDialogData = {
+    "crs": (
+        <div className="max-w-lg p-6 bg-white shadow-lg rounded-lg" >
+            <h2 className="text-2xl font-bold mb-4">Comprehensive Ranking System (CRS)</h2>
+            <p className="mb-4">
+                The CRS is a points-based tool IRCC uses to score and rank all profiles in the Express Entry pool.
+            </p>
+            <ul className="list-disc list-inside space-y-2">
+                <li><strong>Factors considered:</strong> age, education, work experience (Canadian &amp; foreign), language ability, arranged employment, provincial nomination, spouse factors.</li>
+                <li><strong>Maximum score:</strong> 1,200 points.</li>
+                <li><strong>Why it matters:</strong> Your CRS rank determines if and when you receive an Invitation to Apply (ITA) for PR.</li>
+            </ul>
+        </div >
+    ),
+    "fswp": (<div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Federal Skilled Worker Program (FSWP)</h2>
+        <p className="mb-4">
+            A federal pathway for skilled workers with proven foreign work experience.
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+            <li><strong>Work Experience:</strong> ≥1 year paid, full-time skilled work (NOC TEER 0–3) in last 10 years.</li>
+            <li><strong>Language:</strong> CLB 7+ (IELTS 6.0+) in all four skills (English/French).</li>
+            <li><strong>Education:</strong> Canadian secondary/post-secondary credential or ECA equivalency.</li>
+            <li><strong>Points Grid:</strong> ≥67/100 on factors: age, education, language, experience, adaptability.</li>
+            <li><strong>Process:</strong> Submit Express Entry profile → receive ITA → apply for PR.</li>
+        </ul>
+    </div>),
+
+    "cec": (<div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Canadian Experience Class (CEC)</h2>
+        <p className="mb-4">
+            Designed for candidates with skilled work experience in Canada.
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+            <li><strong>Experience:</strong> ≥12 months full-time (or equivalent part-time) skilled work (NOC 0–3) in Canada within last 3 years.</li>
+            <li><strong>Language:</strong> CLB 7 for NOC 0/TEER 1/2; CLB 5 for TEER 3.</li>
+            <li><strong>Status:</strong> Held temporary work or study permit during work term.</li>
+            <li><strong>Benefit:</strong> Faster processing (~6 months), no job offer required.</li>
+        </ul>
+    </div>),
+    "fstp": (<div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Federal Skilled Trades Program (FSTP)</h2>
+        <p className="mb-4">
+            A route for qualified tradespeople to gain Canadian PR.
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+            <li><strong>Work Experience:</strong> ≥2 years full-time in a skilled trade (NOC TEER B) within last 5 years.</li>
+            <li><strong>Job Offer/Certification:</strong> Valid 1-year job offer from a Canadian employer or provincial certificate of qualification.</li>
+            <li><strong>Language:</strong> CLB 5 (speaking/listening) &amp; CLB 4 (reading/writing).</li>
+            <li><strong>Common Trades:</strong> Electricians, welders, plumbers, chefs, heavy-equipment operators, etc.</li>
+        </ul>
+    </div>),
+    "pnp": (
+        <div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+            <h2 className="text-2xl font-bold mb-4">Provincial Nominee Program (PNP)</h2>
+            <p className="mb-4">
+                Provinces/territories nominate candidates with skills matching local labour needs.
+            </p>
+            <ul className="list-disc list-inside space-y-2">
+                <li><strong>Streams:</strong> Each province has its own (e.g., Ontario HCP, BC Tech) targeting specific occupations.</li>
+                <li><strong>Eligibility:</strong> Varies but generally requires relevant experience or a job offer, language proficiency, and intent to reside in the province.</li>
+                <li><strong>Enhanced PNP:</strong> Use Express Entry → nomination adds 600 CRS points → ITA.</li>
+                <li><strong>Base PNP:</strong> Apply directly to province → separate PR application → longer processing.</li>
+            </ul>
+        </div>
+    ),
+    "French-language proficiency": (<div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">French Language Proficiency</h2>
+        <p className="mb-4">
+            Earn points as a second official language using TEF/TCF exams.
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+            <li><strong>CLB Levels:</strong> CLB 5–6 earns 1–3 points per ability; CLB 7+ earns up to 6 points per ability.</li>
+            <li><strong>Bilingualism Bonus:</strong> Up to 50 extra CRS points if you score CLB 7+ in both English & French.</li>
+            <li><strong>Test Options:</strong> TEF Canada, TCF Canada, or NCLC assessments for Quebec programs.</li>
+        </ul>
+    </div>),
+    "Healthcare and social services occupations": (<div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Healthcare & Social Services</h2>
+        <p className="mb-4">
+            To be eligible, you must meet Express Entry’s minimum criteria and:
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+            <li>Have ≥6 months of full-time (or equivalent part-time) work in a single listed healthcare or social-services occupation within the last 3 years (in Canada or abroad).</li>
+            <li>Hold any required professional credentials or licences.</li>
+            <li>Follow all round-specific instructions.</li>
+        </ul>
+    </div>),
+    "Science, Technology, Engineering and Math (STEM) occupations": (<div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">STEM Occupations</h2>
+        <p className="mb-4">
+            To be eligible, you must meet Express Entry’s minimum criteria and:
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+            <li>Have ≥6 months of full-time (or equivalent part-time) work in a single listed STEM occupation within the last 3 years (in Canada or abroad).</li>
+            <li>Possess any required certifications or degrees.</li>
+            <li>Adhere to the specific round instructions.</li>
+        </ul>
+    </div>),
+    "Trade occupations": (<div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Trade Occupations</h2>
+        <p className="mb-4">
+            To be eligible, you must meet Express Entry’s minimum criteria and:
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+            <li>Have ≥6 months of full-time (or equivalent part-time) work in a single listed trade occupation within the last 3 years (in Canada or abroad).</li>
+            <li>Hold any required certifications or provincial trade certificates.</li>
+            <li>Meet all round-specific requirements.</li>
+        </ul>
+    </div>),
+    "Agriculture and agri-food occupations": (<div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Agriculture & Agri-Food</h2>
+        <p className="mb-4">
+            To be eligible, you must meet Express Entry’s minimum criteria and:
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+            <li>Have ≥6 months of full-time (or equivalent part-time) work in a single listed agriculture or agri-food occupation within the last 3 years (in Canada or abroad).</li>
+            <li>Possess any required certifications or licences.</li>
+            <li>Follow all round-specific instructions.</li>
+        </ul>
+    </div>),
+    "Education occupations": (<div className="max-w-lg p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Education Occupations</h2>
+        <p className="mb-4">
+            To be eligible, you must meet Express Entry’s minimum criteria and:
+        </p>
+        <ul className="list-disc list-inside space-y-2">
+            <li>Have ≥6 months of full-time (or equivalent part-time) work in a single listed education occupation within the last 3 years (in Canada or abroad).</li>
+            <li>Hold any required teaching certifications or licences.</li>
+            <li>Comply with all round-specific requirements.</li>
+        </ul>
+    </div>),
+
+}
+
+
 interface PNPAssessment {
     id?: string;
     province: string;
@@ -63,6 +200,9 @@ export default function Report() {
     const [showChatBox, setShowChatBox] = useState(false);
     const [regenerateReport, setRegenerateReport] = useState(false);
     const [consultant, setConsultant] = useState<Consultant[] | null>(null);
+
+    const [showInfoDialog, setShowInfoDialog] = useState(false);
+    const [infoName, setInfoName] = useState<string | null>(null);
     // const [isConsultancyLoading, setIsConsultancyLoading] = useState(false);
     const [msg, setMsg] = useState('');
 
@@ -344,7 +484,14 @@ export default function Report() {
                                         <div className="space-y-6">
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <h3 className="text-lg font-semibold text-secondary-900">Comprehensive Ranking System (CRS) Score</h3>
+                                                    <h3 className="text-lg font-semibold text-secondary-900 flex items-center gap-2">Comprehensive Ranking System (CRS) Score
+                                                        <Info
+                                                            onClick={() => {
+                                                                setInfoName('crs')
+                                                                setShowInfoDialog(true)
+                                                            }}
+                                                            className="w-4 h-4 cursor-pointer " />
+                                                    </h3>
                                                     <p className="text-secondary-600 text-sm">Based on your profile information</p>
                                                 </div>
                                                 <div className="text-center">
@@ -416,15 +563,18 @@ export default function Report() {
                                                         {expressEntryProfile?.eligibilityStatus[0]?.isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
                                                     </div>
                                                     <div className="ml-3">
-                                                        <h5 className="text-sm font-medium text-secondary-900">
+                                                        <h5 className="text-sm font-medium text-secondary-900 flex items-center gap-2">
                                                             {expressEntryProfile?.eligibilityStatus[0]?.program}
+                                                            <Info 
+                                                                onClick={() => {
+                                                                    setInfoName('fswp')
+                                                                    setShowInfoDialog(true)
+                                                                }}
+                                                                className="w-4 h-4 cursor-pointer " /> <span className="text-xs text-secondary-600">Click to learn more</span>
                                                         </h5>
                                                         {expressEntryProfile?.eligibilityStatus[0]?.reason?.map((bd, idx) =>
                                                             <p key={`additional-point-${idx}`} className="text-sm text-secondary-600">{bd}</p>
                                                         )}
-                                                        {/* <p className="text-sm text-secondary-600">
-                            {expressEntryProfile?.eligibilityStatus[0]?.reason}
-                          </p> */}
                                                     </div>
                                                 </div>
 
@@ -433,8 +583,14 @@ export default function Report() {
                                                         {expressEntryProfile?.eligibilityStatus[1]?.isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
                                                     </div>
                                                     <div className="ml-3">
-                                                        <h5 className="text-sm font-medium text-secondary-900">
+                                                        <h5 className="text-sm font-medium text-secondary-900 flex items-center gap-2">
                                                             {expressEntryProfile?.eligibilityStatus[1]?.program}
+                                                            <Info
+                                                                onClick={() => {
+                                                                    setInfoName('cec')
+                                                                    setShowInfoDialog(true)
+                                                                }}
+                                                                className="w-4 h-4 cursor-pointer " />
                                                         </h5>
                                                         {expressEntryProfile?.eligibilityStatus[1]?.reason?.map((bd, idx) =>
                                                             <p key={`additional-point-${idx}`} className="text-sm text-secondary-600">{bd}</p>
@@ -447,8 +603,14 @@ export default function Report() {
                                                         {expressEntryProfile?.eligibilityStatus[2]?.isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
                                                     </div>
                                                     <div className="ml-3">
-                                                        <h5 className="text-sm font-medium text-secondary-900">
+                                                        <h5 className="text-sm font-medium text-secondary-900 flex items-center gap-2">
                                                             {expressEntryProfile?.eligibilityStatus[2]?.program}
+                                                            <Info
+                                                                onClick={() => {
+                                                                    setInfoName('fstp')
+                                                                    setShowInfoDialog(true)
+                                                                }}
+                                                                className="w-4 h-4 cursor-pointer " />
                                                         </h5>
                                                         {expressEntryProfile?.eligibilityStatus[2]?.reason?.map((bd, idx) =>
                                                             <p key={`additional-point-${idx}`} className="text-sm text-secondary-600">{bd}</p>
@@ -469,8 +631,14 @@ export default function Report() {
                                                             {eligibility.isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
                                                         </div>
                                                         <div className="ml-3">
-                                                            <h5 className="text-sm font-medium text-secondary-900">
+                                                            <h5 className="text-sm font-medium text-secondary-900 flex items-center gap-2">
                                                                 {eligibility.program}
+                                                                <Info
+                                                                    onClick={() => {
+                                                                        setInfoName(eligibility.program)
+                                                                        setShowInfoDialog(true)
+                                                                    }}
+                                                                    className="w-4 h-4 cursor-pointer " />
                                                             </h5>
                                                             <p className="text-sm text-secondary-600">
                                                                 {eligibility.reason}
@@ -608,7 +776,14 @@ export default function Report() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <Card className='flex flex-col gap-2 justify-between pdf-section' data-title="Provincial Nominee Program">
                                             <CardHeader>
-                                                <CardTitle>Provincial Nominee Program</CardTitle>
+                                                <CardTitle className='flex items-center gap-2'>Provincial Nominee Program
+                                                    <Info 
+                                                        onClick={() => {
+                                                            setInfoName('pnp')
+                                                            setShowInfoDialog(true)
+                                                        }}
+                                                        className="w-4 h-4 cursor-pointer " />
+                                                </CardTitle>
                                             </CardHeader>
                                             <CardContent >
                                                 <div className="space-y-4">
@@ -852,6 +1027,10 @@ export default function Report() {
                                         </div>
                                     </CardContent>
                                 </Card>
+                                <p className="text-sm text-secondary-600 italic">
+                                    Disclaimer: These results are not immigration advice. If you want to learn more about the program, review the resources below.
+                                </p>
+                                <Link className="text-sm text-secondary-600 flex gap-1 hover:underline" href={"/resources"}><ExternalLink className="w-4 h-4" />View Resources</Link>
                             </div>}
 
                             <div className="lg:col-span-1 space-y-6">
@@ -933,7 +1112,6 @@ export default function Report() {
                                             </Button>
                                         </div>
                                     </CardContent>
-
                                 </Card>
 
                                 {/* <Card>
@@ -1060,6 +1238,15 @@ export default function Report() {
                     message={error || 'An error occurred. Please try again.'}
                     type="error"
                     cancelText="Close"
+                />
+
+                <MessagePopup
+                    isOpen={showInfoDialog}
+                    onClose={() => setShowInfoDialog(false)}
+                    cancelText="Close"
+                    illustration={infoDialogData[infoName as keyof typeof infoDialogData]}
+                    maxWidth='2xl'
+                    
                 />
 
             </Layout>

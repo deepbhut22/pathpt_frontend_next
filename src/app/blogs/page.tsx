@@ -6,6 +6,8 @@ import { BlogPostNew } from '@/types';
 import BlogListingClient from '@/app/blogs/BlogListClientComponent';
 import api from '@/utils/axios';
 import { Suspense } from 'react';
+import ClientOnly from '@/components/ClientOnly';
+import AutoShimmer from '@/components/AutoShimmer';
 
 export const metadata: Metadata = {
   title: 'Canadian Immigration Blog | Expert Tips, News & Policy Updates',
@@ -108,13 +110,13 @@ export default async function BlogListingPage() {
                 </div>
 
                 {/* Client Component for interactive functionality */}
-                <Suspense fallback={<div>Loading blogs...</div>}>
+                <ClientOnly fallback={<AutoShimmer />}>
                     <BlogListingClient
                         initialBlogs={blogs}
                         categories={categories}
                         tags={tags}
                     />
-                </Suspense>
+                </ClientOnly>
             </div>
         </Layout>
     );

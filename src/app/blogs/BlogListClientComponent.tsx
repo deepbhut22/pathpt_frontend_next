@@ -52,7 +52,7 @@ export default function BlogListingClient({
         });
 
         const newUrl = params.toString() ? `?${params.toString()}` : '';
-        router.push(`/blog${newUrl}`, { scroll: false });
+        router.push(`/blogs${newUrl}`, { scroll: false });
     };
 
     // Filter and sort blogs whenever the filters change
@@ -129,7 +129,7 @@ export default function BlogListingClient({
         setSelectedTag('All Tags');
         setSortOption('newest');
         setCurrentPage(1);
-        router.push('/blog');
+        router.push('/blogs');
     };
 
     // Calculate pagination

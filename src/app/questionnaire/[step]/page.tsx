@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Step } from '@/types';
-import { getNextStep } from '@/utils/helpers';
+import { getNextStep, getCurrentStepName } from '@/utils/helpers';
 import { useUserStore } from '@/store/userStore';
 import Layout from '@/components/layout/Layout';
 import QuestionnaireLayout from '@/components/questionnaire/QuestionnaireLayout';
@@ -15,6 +15,8 @@ import Dependent from '@/components/questionnaire/steps/Dependent';
 import Connection from '@/components/questionnaire/steps/Connection';
 import Work from '@/components/questionnaire/steps/Work';
 import JobOffer from '@/components/questionnaire/steps/JobOffer';
+import { isProfileComplete } from '@/utils/profileUtils';
+import api from '@/utils/axios';
 
 export default function Questionnaire() {
     const params = useParams();
@@ -33,8 +35,10 @@ export default function Questionnaire() {
         setIsValid(valid);
     };
 
-    const handleNext = () => {
+    const handleNext = async () => {
         setIsSubmitting(true);
+
+        await handleSave();
 
         // Simulating saving to backend
         setTimeout(() => {
@@ -57,9 +61,23 @@ export default function Questionnaire() {
         router.push(prevUrl);
     };
 
-    const handleSave = () => {
-        // In a real app, this would save to backend
-        alert('Progress saved successfully!');
+    const handleSave = async () => {
+        console.log(useUserStore.getState().userProfile.educationInfo);
+
+        try {
+            const currentStepData = getCurrentStepName(currentStep);
+            const response = await api.put(`/profile/${currentStep}`, currentStepData);
+            if (response.status === 200) {
+                setProfileComplete(isProfileComplete(useUserStore.getState().userProfile));
+
+                alert('Progress saved successfully!');
+            } else {
+                alert('Error saving progress!');
+            }
+        } catch (error) {
+            console.error('Error saving progress:', error);
+            alert('Error saving progress!');
+        }
     };
 
     const getPrevStep = (): string => {

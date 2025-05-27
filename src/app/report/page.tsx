@@ -803,7 +803,7 @@ export default function Report() {
                                                             ))}
                                                         </div>
                                                     }
-                                                    {eligiblePrograms?.map((program, index) => (
+                                                    {eligiblePrograms?.slice(0,3)?.map((program, index) => (
                                                         <div key={`pnp-${index}`} className="flex items-start">
                                                             <div className="flex-shrink-0">
                                                                 {program.status === 'Eligible' ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
@@ -819,6 +819,8 @@ export default function Report() {
                                                             </div>
                                                         </div>
                                                     ))}
+                                                    {eligiblePrograms && eligiblePrograms?.length > 3 && ( <p className="text-sm italic text-secondary-600">You are eligible for more {eligiblePrograms?.length - 3} PNP programs. Click on the button below to view all options.</p>)}
+                                                    
                                                 </div>
                                             </CardContent>
                                             <CardFooter className="flex flex-col gap-2">

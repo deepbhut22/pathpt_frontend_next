@@ -43,6 +43,11 @@
   }
 }
 
+.animate-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 .aurora {
   position: absolute;
   top: -50%;

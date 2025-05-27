@@ -181,71 +181,11 @@ const MarkdownRenderer = ({ content }: { content: string }) => (
     />
 );
 
-// const ImageComponent = ({ imageData }: { imageData: ImageData }) => (
-//     <figure className="my-8">
-//         <img
-//             src={imageData.url}
-//             alt={imageData.alt}
-//             className="w-full rounded-lg shadow-lg"
-//         />
-//         {imageData.caption && (
-//             <figcaption className="mt-2 text-sm text-gray-600 text-center">
-//                 {imageData.caption}
-//             </figcaption>
-//         )}
-//     </figure>
-// );
 
 import ImageComponent from '@/components/ui/BlogImageComponent';
 
-// const VideoComponent = ({ videoData }: { videoData: VideoData }) => (
-//     <div className="my-8">
-//         <video
-//             src={videoData.url}
-//             controls
-//             className="w-full rounded-lg shadow-lg"
-//             title={videoData.title}
-//         />
-//         {videoData.description && (
-//             <p className="mt-2 text-sm text-gray-600">{videoData.description}</p>
-//         )}
-//     </div>
-// );
-
 import VideoComponent from '@/components/ui/BlogVideoComponent';
 
-// const TableComponent = ({ tableData }: { tableData: TableData }) => (
-//     <div className="my-8 overflow-x-auto">
-//         <table className="min-w-full divide-y divide-gray-200 border border-gray-300 rounded-lg">
-//             <thead className="bg-gray-50">
-//                 <tr>
-//                     {tableData.headers.map((header, index) => (
-//                         <th
-//                             key={index}
-//                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-//                         >
-//                             {header}
-//                         </th>
-//                     ))}
-//                 </tr>
-//             </thead>
-//             <tbody className="bg-white divide-y divide-gray-200">
-//                 {tableData.rows.map((row, rowIndex) => (
-//                     <tr key={rowIndex}>
-//                         {row.map((cell, cellIndex) => (
-//                             <td key={cellIndex} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-//                                 {cell}
-//                             </td>
-//                         ))}
-//                     </tr>
-//                 ))}
-//             </tbody>
-//         </table>
-//         {tableData.caption && (
-//             <caption className="mt-2 text-sm text-gray-600">{tableData.caption}</caption>
-//         )}
-//     </div>
-// );
 import TableComponent from '@/components/ui/BlogTableData';
 
 
@@ -259,21 +199,7 @@ const RelatedPosts = ({ category, slug }: { category: string; slug: string }) =>
 };
 
 import ClientHaloWrapper from '@/components/ui/backgrounds/ClientWrapperForHaloBg';
-import Card from '@/components/ui/Card';
-import CardHeader from '@/components/ui/CardHeader';
-import CardContent from '@/components/ui/CardContent';
-import CardTitle from '@/components/ui/CardTitle';
-import Button from '@/components/ui/Button';
-import useAuthStore from '@/store/authStore';
-import ClientOnly from '@/components/ClientOnly';
-import AutoShimmer from '@/components/AutoShimmer';
 import BlogPageSideComponent from '@/components/BlogPageSideComponent';
-// import Card from '@/components/ui/Card';
-// import CardContent from '@/components/ui/CardContent';
-// import CardHeader from '@/components/ui/CardHeader';
-// import CardTitle from '@/components/ui/CardTitle';
-// import Button from '@/components/ui/Button';
-// import useAuthStore from '@/store/authStore';
 
 // Main page component (Server Component)
 export default async function BlogPostPage({ params }: PageProps) {
@@ -427,7 +353,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     </div>
                 )} */}
             </div>
-            
+
         </ClientWrapperForLayout>
     );
 }

@@ -39,7 +39,7 @@ export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 
-  const isHome = pathname === '/';
+  const isHome = pathname === '/' || pathname === '/about' || pathname === '/contact';
   const isMappleAi = pathname === '/mapleAi';
   const isAuthPage = pathname === '/login' || pathname === '/register';
 
@@ -86,6 +86,8 @@ export default function Header() {
     { path: '/mapleAi', label: 'MapleAI' },
     { path: "/report", label: 'My Report' },
     { path: "/blogs", label: 'Blogs' },
+    { path: "/about", label: 'About' },
+    { path: "/contact", label: 'Contact' },
     // { path: '/news', label: 'News' },
   ];
 
@@ -101,7 +103,7 @@ export default function Header() {
     if (insightsItems.some(item => item.path === path)) {
       setIsDropdownOpen(false);
       router.push(path);
-    } else if (!isAuth && path !== '/' && path !== '/blogs' && path !== '/mapleAi') {
+    } else if (!isAuth && path !== '/' && path !== '/blogs' && path !== '/mapleAi' && path !== '/about' && path !== '/contact') {
       useAuthStore.getState().setIsLoginRequiredPopupOpen(true);
     } else if (isAuth && !isProfileComplete && path === '/report') {
       useAuthStore.getState().setIsPopupOpen(true);

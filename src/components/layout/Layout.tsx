@@ -55,7 +55,7 @@ export default function Layout({ children, className = '' }: LayoutProps) {
   );
 }
 
-const benefits = [
+export const benefits = [
   {
     text: (
       <p className="text-secondary-600">

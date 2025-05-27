@@ -170,8 +170,8 @@ const ContactUs = () => {
                                 {
                                     icon: "📞",
                                     title: "Phone Support",
-                                    info: "+1 (647) 123-4567",
-                                    description: "Speak with our immigration experts",
+                                    info: "+1 (438) 927-5153",
+                                    description: "Contact with our team",
                                     gradient: "from-green-500 to-emerald-500"
                                 },
                                 {
@@ -184,7 +184,7 @@ const ContactUs = () => {
                                 {
                                     icon: "📍",
                                     title: "Office Location",
-                                    info: "Toronto, ON",
+                                    info: "Vancouver, BC",
                                     description: "Virtual consultations available worldwide",
                                     gradient: "from-orange-500 to-red-500"
                                 }

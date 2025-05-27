@@ -208,7 +208,7 @@ const AboutUs = () => {
                             <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-3xl p-8 backdrop-blur-sm border border-secondary-700/50">
                                 <div className="grid grid-cols-2 gap-6 text-center">
                                     <div className="bg-secondary-800/50 rounded-xl p-6">
-                                        <div className="text-3xl font-bold text-blue-400 mb-2">10,000+</div>
+                                        <div className="text-3xl font-bold text-blue-400 mb-2">1,000+</div>
                                         <div className="text-secondary-300">Success Stories</div>
                                     </div>
                                     <div className="bg-secondary-800/50 rounded-xl p-6">

@@ -26,8 +26,8 @@ export default function Questionnaire() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const { setProfileComplete } = useUserStore();
-    console.log('Rendering step page');
-    console.log('Step:', step);
+    // console.log('Rendering step page');
+    // console.log('Step:', step);
 
     const currentStep = step as Step;
 
@@ -62,7 +62,7 @@ export default function Questionnaire() {
     };
 
     const handleSave = async () => {
-        console.log(useUserStore.getState().userProfile.educationInfo);
+        // console.log(useUserStore.getState().userProfile.educationInfo);
 
         try {
             const currentStepData = getCurrentStepName(currentStep);

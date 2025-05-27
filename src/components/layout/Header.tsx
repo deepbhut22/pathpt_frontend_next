@@ -87,7 +87,7 @@ export default function Header() {
     { path: "/report", label: 'My Report' },
     { path: "/blogs", label: 'Blogs' },
     { path: "/about", label: 'About' },
-    { path: "/contact", label: 'Contact' },
+    { path: "/contact", label: 'Contact Us' },
     // { path: '/news', label: 'News' },
   ];
 

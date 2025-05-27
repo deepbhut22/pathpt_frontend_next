@@ -248,7 +248,7 @@ export default function Report() {
     };
 
     const transformPNPOptions = (assessments: PNPAssessment[]): PNPOption[] => {
-        return assessments.map((assessment, index) => ({
+        const assessmentOptions = assessments.map((assessment, index) => ({
             id: assessment.id || `pnp-${index}`,
             province: assessment.province,
             stream_name: assessment.stream_name,
@@ -256,6 +256,11 @@ export default function Report() {
             reason: assessment.reason,
             selected: selectedPNPOption === (assessment.id || `pnp-${index}`)
         }));
+
+        const eligiblePrograms = assessmentOptions.filter((option) => option.status === 'Eligible');
+        const ineligiblePrograms = assessmentOptions.filter((option) => option.status === 'Ineligible');
+
+        return [...eligiblePrograms, ...ineligiblePrograms];
     };
 
     const downloadReport = async () => {
@@ -819,7 +824,7 @@ export default function Report() {
                                                             </div>
                                                         </div>
                                                     ))}
-                                                    {eligiblePrograms && eligiblePrograms?.length > 3 && ( <p className="text-sm italic text-secondary-600">You are eligible for more {eligiblePrograms?.length - 3} PNP programs. Click on the button below to view all options.</p>)}
+                                                    {eligiblePrograms && eligiblePrograms?.length > 3 && ( <p className="text-sm italic text-secondary-600">You are eligible for total of {eligiblePrograms?.length} PNP programs. Click on the button below to view all options.</p>)}
                                                     
                                                 </div>
                                             </CardContent>
@@ -843,7 +848,7 @@ export default function Report() {
                                             </CardFooter>
                                         </Card>
 
-                                        <Card className='pdf-section' data-title="Alternative Pathways">
+                                        <Card className='pdf-section flex flex-col gap-2 justify-between' data-title="Alternative Pathways">
                                             <CardHeader>
                                                 <CardTitle>Alternative Pathways</CardTitle>
                                             </CardHeader>

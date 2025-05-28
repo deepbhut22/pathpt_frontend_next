@@ -6,17 +6,18 @@ import { Search, Calendar, Tag, ChevronDown } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { BlogPostNew } from '@/types';
 import BlogCard from '@/components/ui/BlogCard';
+import api from '@/utils/axios';
 
 interface BlogListingClientProps {
-    initialBlogs: BlogPostNew[];
-    categories: string[];
-    tags: string[];
+    // initialBlogs: BlogPostNew[];
+    // categories: string[];
+    // tags: string[];
 }
 
 export default function BlogListingClient({
-    initialBlogs,
-    categories,
-    tags
+    // initialBlogs,
+    // categories,
+    // tags
 }: BlogListingClientProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -29,13 +30,16 @@ export default function BlogListingClient({
     const initialPage = parseInt(searchParams.get('page') || '1', 10);
 
     const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
+    const [initialBlogs, setInitialBlogs] = useState<BlogPostNew[]>([]);
     const [selectedCategory, setSelectedCategory] = useState(initialCategory);
     const [selectedTag, setSelectedTag] = useState(initialTag);
     const [showFilters, setShowFilters] = useState(false);
     const [sortOption, setSortOption] = useState(initialSort);
-    const [filteredBlogs, setFilteredBlogs] = useState<BlogPostNew[]>(initialBlogs);
+    const [filteredBlogs, setFilteredBlogs] = useState<BlogPostNew[]>([]);
     const [currentPage, setCurrentPage] = useState(initialPage);
     const [isLoading, setIsLoading] = useState(false);
+    const [categories, setCategories] = useState<string[]>([]);
+    const [tags, setTags] = useState<string[]>([]);
 
     const itemsPerPage = 9;
 
@@ -58,6 +62,24 @@ export default function BlogListingClient({
     // Filter and sort blogs whenever the filters change
     useEffect(() => {
         setIsLoading(true);
+
+        const fetchBlogs = async () => {
+            const blogs = await api.get('/blog');
+            setInitialBlogs(blogs.data);
+        };
+        
+        fetchBlogs();
+
+        const uniqueCategories = Array.from(
+            new Set(initialBlogs.flatMap((blog) => blog.categories || []))
+        ) as string[];
+
+        const uniqueTags = Array.from(
+            new Set(initialBlogs.flatMap((blog) => blog.tags || []))
+        ) as string[];
+
+        setCategories(['All Categories', ...uniqueCategories]);
+        setTags(['All Tags', ...uniqueTags]);
 
         let result = [...initialBlogs];
 

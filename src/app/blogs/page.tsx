@@ -112,9 +112,9 @@ export default async function BlogListingPage() {
                 {/* Client Component for interactive functionality */}
                 <ClientOnly fallback={<AutoShimmer />}>
                     <BlogListingClient
-                        initialBlogs={blogs}
-                        categories={categories}
-                        tags={tags}
+                        // initialBlogs={blogs}
+                        // categories={categories}
+                        // tags={tags}
                     />
                 </ClientOnly>
             </div>

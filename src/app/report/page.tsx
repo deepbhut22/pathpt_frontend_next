@@ -651,109 +651,6 @@ export default function Report() {
                                                         </div>
                                                     </div>
                                                 ))}
-
-                                                {/* <div className="flex items-start mt-2">
-                        <div className="flex-shrink-0">
-                          {expressEntryProfile?.categoryBasedEligibility[0].isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
-                        </div>
-                        <div className="ml-3">
-                          <h5 className="text-sm font-medium text-secondary-900">
-                            {expressEntryProfile?.categoryBasedEligibility[0].program}
-                          </h5>
-                          <p className="text-sm text-secondary-600">
-                            {expressEntryProfile?.categoryBasedEligibility[0]?.details}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start mt-4">
-                        <div className="flex-shrink-0">
-                          {expressEntryProfile?.categoryBasedEligibility[1].isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
-                        </div>
-                        <div className="ml-3">
-                          <h5 className="text-sm font-medium text-secondary-900">
-                            {expressEntryProfile?.categoryBasedEligibility[1]?.program}
-                          </h5>
-                          <p className="text-sm text-secondary-600">
-                            {expressEntryProfile?.categoryBasedEligibility[1]?.details}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start mt-4">
-                        <div className="flex-shrink-0">
-                          {expressEntryProfile?.categoryBasedEligibility[2].isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
-                        </div>
-                        <div className="ml-3">
-                          <h5 className="text-sm font-medium text-secondary-900">
-                            {expressEntryProfile?.categoryBasedEligibility[2]?.program}
-                          </h5>
-                          <p className="text-sm text-secondary-600">
-                            {expressEntryProfile?.categoryBasedEligibility[2]?.details}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start mt-4">
-                        <div className="flex-shrink-0">
-                          {expressEntryProfile?.categoryBasedEligibility[3].isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
-                        </div>
-                        <div className="ml-3">
-                          <h5 className="text-sm font-medium text-secondary-900">
-                            {expressEntryProfile?.categoryBasedEligibility[3].program}
-                          </h5>
-                          <p className="text-sm text-secondary-600">
-                            {expressEntryProfile?.categoryBasedEligibility[3].details}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start mt-4">
-                        <div className="flex-shrink-0">
-                            {expressEntryProfile?.categoryBasedEligibility[4].isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
-                        </div>
-                        <div className="ml-3">
-                          <h5 className="text-sm font-medium text-secondary-900">
-                              {expressEntryProfile?.categoryBasedEligibility[4]?.program}
-                          </h5>
-                          <p className="text-sm text-secondary-600">
-                              {expressEntryProfile?.categoryBasedEligibility[4]?.details}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start mt-4">
-                        <div className="flex-shrink-0">
-                          {expressEntryProfile?.categoryBasedEligibility[5]?.isEligible ? <CheckCircle className="h-5 w-5 text-green-500" /> : <AlertTriangle className="h-5 w-5 text-yellow-500" />}
-                        </div>
-                        <div className="ml-3">
-                          <h5 className="text-sm font-medium text-secondary-900">
-                            {expressEntryProfile?.categoryBasedEligibility[5]?.program}
-                          </h5>
-                          <p className="text-sm text-secondary-600">
-                            {expressEntryProfile?.categoryBasedEligibility[5]?.details}
-                          </p>
-                        </div>
-                      </div>
-                    </div> */}
-
-                                                {/* <div className="border-t border-secondary-200 pt-4">
-                      <h4 className="font-medium text-secondary-900 mb-3">Recent Draw Information</h4>
-                      <p className="text-sm text-secondary-600 mb-2">
-                        Based on recent Express Entry draws, your score of <span className="font-medium">{useExpressEntryStore.getState().profile?.crsScore}</span> would have been:
-                      </p>
-                      <div className="bg-green-50 border border-green-200 rounded-md p-3">
-                        <div className="flex">
-                          <div className="flex-shrink-0">
-                            <CheckCircle className="h-5 w-5 text-green-500" />
-                          </div>
-                          <div className="ml-3">
-                            <p className="text-sm font-medium text-green-800">
-                              {useExpressEntryStore.getState().profile?.eligibilityStatus[2].details}
-                            </p>
-                          </div>
-                        </div>
-                      </div> */}
                                             </div>
                                         </div>
                                     </CardContent>
@@ -769,9 +666,6 @@ export default function Report() {
                                                 Learn more about Express Entry
                                                 <ExternalLink className="ml-1 h-3 w-3" />
                                             </a>
-                                            {/* <Button size="sm">
-                      Improve Your Score
-                    </Button> */}
                                         </div>
                                     </CardFooter>
                                 </Card>
@@ -878,35 +772,6 @@ export default function Report() {
                                                         </div>
 
                                                     ))}
-
-
-                                                    {/* <div className="flex items-start">
-                        <div className="flex-shrink-0">
-                          <AlertTriangle className="h-5 w-5 text-yellow-500" />
-                        </div>
-                        <div className="ml-3">
-                          <h5 className="text-sm font-medium text-secondary-900">
-                            Rural and Northern Immigration Pilot
-                          </h5>
-                          <p className="text-sm text-secondary-600">
-                            Requires job offer in participating community
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0">
-                          <AlertTriangle className="h-5 w-5 text-yellow-500" />
-                        </div>
-                        <div className="ml-3">
-                          <h5 className="text-sm font-medium text-secondary-900">
-                            Start-up Visa Program
-                          </h5>
-                          <p className="text-sm text-secondary-600">
-                            Requires business concept and support from designated organization
-                          </p>
-                        </div>
-                      </div> */}
                                                 </div>
                                             </CardContent>
                                             <CardFooter>
@@ -945,23 +810,6 @@ export default function Report() {
                                                             </p>
                                                         </li>
                                                     ))}
-
-                                                    {/* <li className="flex items-start">
-                          <div className="flex-shrink-0 h-5 w-5 bg-primary-500 rounded-full flex items-center justify-center text-white text-xs mr-3 mt-0.5">
-                            2
-                          </div>
-                          <p className="text-secondary-600">
-                            <span className="font-medium text-secondary-900">Obtain a Canadian job offer:</span> A valid job offer with LMIA can add 50-200 points depending on the NOC code.
-                          </p>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="flex-shrink-0 h-5 w-5 bg-primary-500 rounded-full flex items-center justify-center text-white text-xs mr-3 mt-0.5">
-                            3
-                          </div>
-                          <p className="text-secondary-600">
-                            <span className="font-medium text-secondary-900">Provincial nomination:</span> Actively pursue provincial nomination, which adds 600 points to your CRS score.
-                          </p>
-                        </li> */}
                                                 </ul>
                                             </div>
 

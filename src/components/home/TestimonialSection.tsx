@@ -12,7 +12,7 @@ export default function TestimonialSection() {
     },
     {
       id: 2,
-      content: "“The detailed profile assessment saved me time and money. Instead of applying for programs where I had little chance, PathPR.ca directed me straight to the Atlantic Immigration Pilot—where I qualified easily.”",
+      content: "The detailed profile assessment saved me time and money. Instead of applying for programs where I had little chance, PathPR.ca directed me straight to the Atlantic Immigration Pilot—where I qualified easily.",
       author: "Raj",
       origin: "Toronto",
       rating: 5,

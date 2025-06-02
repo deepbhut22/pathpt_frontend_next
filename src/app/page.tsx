@@ -149,7 +149,7 @@ export default function Home() {
                     </div>
                     <div className='flex justify-between items-center'>
                       {/* <p className='text-secondary-600'>View all draws</p> */}
-                      <Link className='text-secondary-600 text-sm underline flex items-center gap-1' href="/immigration-statistics"><ExternalLink className='w-4 h-4' /> View All Draws</Link>
+                      <Link className='text-secondary-600 text-sm underline flex items-center gap-1' href="/statistics"><ExternalLink className='w-4 h-4' /> View All Draws</Link>
                     </div>
                   </div>
                 </div>

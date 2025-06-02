@@ -106,7 +106,7 @@ export default function HeroSection() {
                       </div>
                     </button>
                     <button
-                      onClick={() => router.push('/immigration-statistics')}
+                      onClick={() => router.push('/statistics')}
                       className="p-[3px] relative w-full">
                       <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
                       <div className="p-2 bg-secondary-950 rounded-[6px] text-sm md:text-md relative group transition duration-200 text-white hover:bg-transparent h-full flex justify-center items-center">

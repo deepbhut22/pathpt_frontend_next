@@ -3,13 +3,18 @@
 import { type MetadataRoute } from 'next';
 import api from '@/utils/axios';
 
-const fetchBlogSlugs = async () => {
-    const response = await api.get('/blogs');
-    return response.data.map((blog: any) => `/blogs/${blog.slug}`);
-}
 
 export async function GET(): Promise<Response> {
     const baseUrl = 'https://pathpr.ca';
+
+    let blogSlugs: string[] = [];
+    
+    try {
+        const response = await api.get('/blogs');
+        blogSlugs = response.data.map((blog: any) => `/blogs/${blog.slug}`);
+    } catch (error) {
+        console.error('Error fetching blog slugs:', error);
+    }
 
     // Static routes
     const staticRoutes = [
@@ -24,7 +29,7 @@ export async function GET(): Promise<Response> {
 
     // Dynamic routes (e.g., blog slugs)
     const dynamicRoutes = [
-        ...(await fetchBlogSlugs()),
+        ...blogSlugs,
         '/profile',
         '/report',
         '/statistics',

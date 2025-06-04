@@ -23,6 +23,7 @@ import { HorizontalSlider } from '@/components/ui/HorizontalSlider';
 import ClientOnly from '@/components/ClientOnly';
 import AutoShimmer from '@/components/AutoShimmer';
 import ExpressEntryDrawsChart from '@/components/ExpressEntryMainChart';
+import RecentDraws from '@/components/home/RecentDraws';
 // import consultantsData from '@/utils/ConsultanatFakeData.json';
 // import { ConsultantCard } from '@/pages/ConsultantList';
 export default function Home() {
@@ -60,8 +61,6 @@ export default function Home() {
         {/* Hero section remains at the top for immediate impact */}
         <HeroSection />
 
-
-
         <ExpressEntryDrawsChart className='w-full border-none mt-0 pt-24 md:px-24' isFromHomePage={true} />
 
         {/* Latest News component first as requested */}
@@ -75,6 +74,8 @@ export default function Home() {
             />
           </div>
         </div>
+
+
 
         {/* Recent Draws and Pathway Card side by side with equal height */}
         <div className="bg-white">
@@ -100,7 +101,8 @@ export default function Home() {
                     Latest invitation rounds for Canada's immigration programs.
                   </p>
                   <div className="space-y-4">
-                    <div
+                    <RecentDraws />
+                    {/* <div
                       onClick={() => window.open("https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/policies-operational-instructions-agreements/ministerial-instructions/express-entry-rounds/invitations.html?q=347", "_blank", "noopener,noreferrer")}
                       className="border-b border-secondary-200 pb-1 cursor-pointer hover:bg-secondary-200 transition-all duration-300 rounded-md hover:px-2 hover:py-1">
                       <div className="flex justify-between items-center mb-1">
@@ -146,7 +148,7 @@ export default function Home() {
                         <div className="text-sm text-secondary-600">500 invitations</div>
                         <div className="text-sm font-medium bg-secondary-100 text-secondary-800 px-2 py-1 rounded">CRS: 510</div>
                       </div>
-                    </div>
+                    </div> */}
                     <div className='flex justify-between items-center'>
                       {/* <p className='text-secondary-600'>View all draws</p> */}
                       <Link className='text-secondary-600 text-sm underline flex items-center gap-1' href="/statistics"><ExternalLink className='w-4 h-4' /> View All Draws</Link>

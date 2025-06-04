@@ -258,7 +258,7 @@ export default function Report() {
         }));
 
         const eligiblePrograms = assessmentOptions.filter((option) => option.status === 'Eligible');
-        const ineligiblePrograms = assessmentOptions.filter((option) => option.status === 'Ineligible');
+        const ineligiblePrograms = assessmentOptions.filter((option) => option.status === 'Not Eligible');
 
         return [...eligiblePrograms, ...ineligiblePrograms];
     };

@@ -10,7 +10,7 @@ export async function GET(): Promise<Response> {
     let blogSlugs: string[] = [];
     
     try {
-        const response = await api.get('/blogs');
+        const response = await api.get('/blog');
         blogSlugs = response.data.map((blog: any) => `/blogs/${blog.slug}`);
     } catch (error) {
         console.error('Error fetching blog slugs:', error);

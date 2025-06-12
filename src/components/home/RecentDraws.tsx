@@ -20,8 +20,12 @@ export default function RecentDraws() {
     }, []);
 
     const formatDate = (date: string) => {
-        const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(date).toLocaleDateString('en-US', options);
+
+        const utcDate = new Date(date);
+        const year = utcDate.getUTCFullYear();
+        const month = utcDate.getUTCMonth() + 1;
+        const day = utcDate.getUTCDate();
+        return `${year}-${month}-${day}`;
     }
 
     if (recentDraws.length === 0) {

@@ -21,11 +21,13 @@ export default function RecentDraws() {
 
     const formatDate = (date: string) => {
 
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
         const utcDate = new Date(date);
         const year = utcDate.getUTCFullYear();
-        const month = utcDate.getUTCMonth() + 1;
+        const month = months[utcDate.getUTCMonth()];
         const day = utcDate.getUTCDate();
-        return `${year}-${month}-${day}`;
+        return `${month} ${day}, ${year}`;
     }
 
     if (recentDraws.length === 0) {

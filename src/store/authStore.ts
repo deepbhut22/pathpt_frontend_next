@@ -115,7 +115,7 @@ const useAuthStore = create<AuthState & {
   setIsConsultationDialogOpen: (isConsultationDialogOpen: boolean) => void;
 }>((set) => ({
   user: null,
-  isAuthenticated: true, // make is false for production
+  isAuthenticated: false, // make is false for production
   isLoading: false,
   error: null,
   isPopupOpen: false,
